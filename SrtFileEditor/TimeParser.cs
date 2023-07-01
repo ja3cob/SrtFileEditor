@@ -2,9 +2,7 @@
 
 internal static class TimeParser
 {
-    private const int MilisecondsInSecond = 1000;
-    private const int MilisecondsInMinute = MilisecondsInSecond * 60;
-    private const int MilisecondsInHour = MilisecondsInMinute * 60;
+    public static long TimeToMiliseconds(this string time)
 
     public static long ParseTime(this string time)
     {
@@ -31,7 +29,7 @@ internal static class TimeParser
         second = ReadUntilToken(time, ref index, ',');
         microsecond = ReadUntilToken(time, ref index, ' ');
 
-        return microsecond + second * MilisecondsInSecond + minute * MilisecondsInMinute + hour * MilisecondsInHour;
+        return microsecond + second * TimeRange.MilisecondsInSecond + minute * TimeRange.MilisecondsInMinute + hour * TimeRange.MilisecondsInHour;
     }
 
     private static short ReadUntilToken(string source, ref byte index, char token)

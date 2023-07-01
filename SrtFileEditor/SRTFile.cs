@@ -2,7 +2,6 @@
 
 internal static class SRTFile
 {
-    private const string TimeSeparator = "-->";
     public static List<Subtitle> Read(string fileName)
     {
         string[] fileContents = File.ReadAllLines(fileName);
