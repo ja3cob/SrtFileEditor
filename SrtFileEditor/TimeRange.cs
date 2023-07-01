@@ -20,6 +20,18 @@ internal class TimeRange
         StartTime += amountMiliseconds;
         EndTime += amountMiliseconds;
     }
+    private static string MilisecondsToTime(long timeInMiliseconds)
+    {
+        long hours = timeInMiliseconds / MilisecondsInHour;
+        long minutes = timeInMiliseconds / MilisecondsInMinute - hours * 60;
+        long seconds = timeInMiliseconds / MilisecondsInSecond - minutes * 60 - hours * 60 * 60;
+        long miliseconds = timeInMiliseconds % MilisecondsInSecond;
+
+        return $"{hours:00}:{minutes:00}:{seconds:00},{miliseconds:000}";
+    }
+    public override string ToString()
+    {
+        return $"{MilisecondsToTime(StartTime)} {TimeSeparator} {MilisecondsToTime(EndTime)}";
     }
     public static TimeRange Convert(string stimeRange)
     {
