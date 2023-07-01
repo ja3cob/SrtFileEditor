@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace SrtFileEditor;
+﻿namespace SrtFileEditor;
 
 internal class Program
 {
@@ -44,6 +42,15 @@ internal class Program
     }
     static void Main()
     {
+        List<Subtitle> subtitles = SRTFile.Read(FileName);
+        ShiftAllTimes(MilisecondsToShift, ref subtitles);
 
+        var extractedSubtitles = ExtractAndRemoveSubtitlesWithFullSecond(ref subtitles);
+
+        FixIds(ref subtitles);
+        FixIds(ref extractedSubtitles);
+
+        SRTFile.Write(FileName, subtitles);
+        SRTFile.Write(NewFileName, extractedSubtitles);
     }
 }
