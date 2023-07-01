@@ -25,7 +25,7 @@ internal static class SRTFile
         id = int.Parse(fileContents[lineNumber]);
         lineNumber++;
 
-        timeRange = ReadTimeRange(fileContents[lineNumber]);
+        timeRange = TimeRange.Convert(fileContents[lineNumber]);
         lineNumber++;
 
         text = "";
@@ -39,15 +39,15 @@ internal static class SRTFile
 
         return new Subtitle(id, timeRange, text);
     }
+    public static void Write(string fileName, List<Subtitle> contents)
+    {
+        var scontents = new List<string>();
 
-    private static TimeRange ReadTimeRange(string stimeRange)
-    { 
-        if(!stimeRange.Contains($" {TimeSeparator} ")) { throw new ArgumentException($"{nameof(stimeRange)} was in an incorrect format"); }
-        if(!stimeRange.EndsWith(' ')) { stimeRange += ' '; }
+        foreach(Subtitle subtitle in contents) 
+        {
+            scontents.Add(subtitle.ToString());
+        }
 
-        int separatorStartIndex = stimeRange.LastIndexOf(TimeSeparator);
-        int separatorEndIndex = separatorStartIndex + TimeSeparator.Length + 1;
-
-        return new TimeRange(stimeRange.Remove(separatorStartIndex).ParseTime(), stimeRange.Remove(0, separatorEndIndex).ParseTime());
+        File.WriteAllLines(fileName, scontents);
     }
 }

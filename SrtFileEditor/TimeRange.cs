@@ -13,4 +13,14 @@ internal class TimeRange
         StartTime = startTime;
         EndTime = endTime;
     }
+    public static TimeRange Convert(string stimeRange)
+    {
+        if (!stimeRange.Contains($" {TimeSeparator} ")) { throw new ArgumentException($"{nameof(stimeRange)} was in an incorrect format ({stimeRange})"); }
+        if (!stimeRange.EndsWith(' ')) { stimeRange += ' '; }
+
+        int separatorStartIndex = stimeRange.LastIndexOf(TimeSeparator);
+        int separatorEndIndex = separatorStartIndex + TimeSeparator.Length + 1;
+
+        return new TimeRange(stimeRange.Remove(separatorStartIndex).TimeToMiliseconds(), stimeRange.Remove(0, separatorEndIndex).TimeToMiliseconds());
+    }
 }
