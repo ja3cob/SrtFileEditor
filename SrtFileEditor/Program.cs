@@ -4,6 +4,10 @@ namespace SrtFileEditor;
 
 internal class Program
 {
+    private const long MilisecondsToShift = 5 * TimeRange.MilisecondsInSecond + 880;
+    private const string FileName = "napisy do filmu.srt";
+    private const string NewFileName = "napisy do filmu1.srt";
+
     private static void ShiftAllTimes(long amountMiliseconds, ref List<Subtitle> subtitles)
     {
         foreach(Subtitle subtitle in subtitles)
