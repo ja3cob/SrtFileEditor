@@ -3,8 +3,6 @@
 internal static class TimeParser
 {
     public static long TimeToMiliseconds(this string time)
-
-    public static long ParseTime(this string time)
     {
         long result;
         try
@@ -12,7 +10,7 @@ internal static class TimeParser
             if (time.Length != 13) { throw new Exception(); }
             result = ParseInternal(time);
         }
-        catch (Exception) { throw new ArgumentException($"String {nameof(time)} was in an incorrect format ({time})"); }
+        catch (Exception) { throw new ArgumentException($"{nameof(time)} was in an incorrect format ({time})"); }
 
         return result;
     }
