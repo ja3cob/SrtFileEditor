@@ -1,5 +1,5 @@
-﻿namespace SrtFileEditor
-{
+﻿namespace SrtFileEditor;
+
     internal class Subtitle
     {
         public int Id { get; set; }
