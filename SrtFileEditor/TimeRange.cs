@@ -1,10 +1,7 @@
 ﻿namespace SrtFileEditor;
 
 internal class TimeRange
-{
-    public const int MilisecondsInSecond = 1000;
-    public const int MilisecondsInMinute = MilisecondsInSecond * 60;
-    public const int MilisecondsInHour = MilisecondsInMinute * 60;
+{ 
     private const string TimeSeparator = "-->";
 
     public long StartTime { get; set; }
@@ -20,19 +17,12 @@ internal class TimeRange
         StartTime += amountMiliseconds;
         EndTime += amountMiliseconds;
     }
-    private static string MilisecondsToTime(long timeInMiliseconds)
-    {
-        long hours = timeInMiliseconds / MilisecondsInHour;
-        long minutes = timeInMiliseconds / MilisecondsInMinute - hours * 60;
-        long seconds = timeInMiliseconds / MilisecondsInSecond - minutes * 60 - hours * 60 * 60;
-        long miliseconds = timeInMiliseconds % MilisecondsInSecond;
 
-        return $"{hours:00}:{minutes:00}:{seconds:00},{miliseconds:000}";
-    }
     public override string ToString()
     {
-        return $"{MilisecondsToTime(StartTime)} {TimeSeparator} {MilisecondsToTime(EndTime)}";
+        return $"{TimeParser.MilisecondsToTime(StartTime)} {TimeSeparator} {TimeParser.MilisecondsToTime(EndTime)}";
     }
+
     public static TimeRange Convert(string stimeRange)
     {
         if (!stimeRange.Contains($" {TimeSeparator} ")) { throw new ArgumentException($"{nameof(stimeRange)} was in an incorrect format ({stimeRange})"); }

@@ -39,6 +39,7 @@ internal static class SRTFile
 
         return new Subtitle(id, timeRange, text);
     }
+
     public static void Write(string fileName, List<Subtitle> contents)
     {
         var scontents = new List<string>();

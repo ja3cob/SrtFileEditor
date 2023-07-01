@@ -2,7 +2,7 @@
 
 internal class Program
 {
-    private const long MilisecondsToShift = 5 * TimeRange.MilisecondsInSecond + 880;
+    private const long MilisecondsToShift = 5 * TimeParser.MilisecondsInSecond + 880;
     private const string FileName = "napisy do filmu.srt";
     private const string NewFileName = "napisy do filmu1.srt";
 
@@ -40,6 +40,7 @@ internal class Program
             subtitles[i].Id = i + 1;
         }
     }
+
     static void Main()
     {
         List<Subtitle> subtitles = SRTFile.Read(FileName);
